@@ -22,6 +22,8 @@
 
         <script type="text/javascript" src="/custom/js/custom.js"></script>
 
+        <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
+
 
     </head>
     <body>
@@ -31,7 +33,7 @@
 
         <div id="dados-inscricao" ng-controller="InscricaoCtrl" class="container">
             <div class="row">
-                <div class="col-xs-12"><h1 class="page-title">Inscreva-se já:</h1><p>Preencha os campos a seguir:</p></div>
+                <div class="col-xs-12"><h1 class="page-title">Inscreva-se já (Curso de Reciclagem para Condutores Infratores, 270 BRL):</h1><p>Preencha os campos a seguir:</p></div>
             </div>
             <div class="row">
                 <form  id='signup'>
@@ -71,19 +73,69 @@
                         <div class="form-group"><label>Categoria</label><select name="categoria" class="form-control ng-pristine ng-empty ng-invalid ng-invalid-required ng-touched" ng-model="inscricao.categoria" required=""><option value="">Selecionar</option><option value="A">A</option></select></div>
                         <div class="form-group"><label>Senha</label><input type="password" name="password" ng-model="inscricao.password" required="" class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required"></div>
                         <div class="form-group" style="text-align: center;">
-
-
+                            <br/><br/><br/><div id="paypal-button"></div>    
                         </div>
 
                     </div>
                 </form>
-                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
-                    <input type="hidden" name="cmd" value="_s-xclick">
-                    <input type="hidden" name="hosted_button_id" value="HZ8PZKUZZEQMY">
-                    <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                    <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
-                </form>
+
             </div>
         </div>
+
+        <script>
+            paypal.Button.render({
+                env: 'sandbox', // Optional: specify 'sandbox' environment
+
+                client: {
+                    sandbox: 'AfFRS3jrsy0B2NzJjUjhEscrdqtU7CtC5-zT2BtU0AYlbrI5b7v6g3Qttj6thQMV9ANQFIcF2xNAaBE3',
+                    production: 'xxxxxxxxx'
+                },
+                payment: function () {
+
+                    var env = this.props.env;
+                    var client = this.props.client;
+                    return paypal.rest.payment.create(env, client, {
+                        "intent": "sale",
+                        "payer": {
+                            "payment_method": "paypal"
+                        },
+                        "transactions": [
+                            {
+                                "amount": {"total": "270", "currency": "BRL"},
+                                "description": "Recicle course for violators drivers."
+                            }
+                        ],
+                        "note_to_payer": "Curso de Reciclagem para Condutores Infratores, 270 BRL",
+                        "redirect_urls": {
+                            "return_url": "http://ead.iprovida.org.br/custom/signup/paypal_success.php",
+                            "cancel_url": "http://ead.iprovida.org.br/signup.php"
+                        }
+                    }); // end if paypal payment create
+                },
+                commit: true, // Optional: show a 'Pay Now' button in the checkout flow
+
+                onAuthorize: function (data, actions) {
+
+                    console.log(JSON.stringify(data));
+
+                    /*
+                     if (error === 'INSTRUMENT_DECLINED') {
+                     actions.restart();
+                     }
+                     */
+
+                    return actions.redirect();
+                },
+                onCancel: function (data, actions) {
+                    return actions.redirect();
+                },
+                onError: function (err) {
+                    // Show an error page here, when an error occurs
+                }
+
+            }, '#paypal-button');
+        </script>
+
+
     </body>
 </html>

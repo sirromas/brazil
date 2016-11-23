@@ -1,45 +1,63 @@
-<!DOCTYPE html>
 
-<html>
-    <head>
-        <title>Signup</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<?php
+require_once './classes/Signup.php';
+$sn = new Signup();
 
-        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+if ($_POST) {
 
-        <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
+    /*
+      echo "<pre>";
+      print_r($_POST);
+      echo "</pre><br>--------------------------------------<br>";
+     */
 
-        <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" >
+    // Prepare user object
+    $user = new stdClass();
+    $names = $_POST['name'];
+    $names_arr = explode(' ', $names);
 
-        <link rel="stylesheet" href="http://ipvtransito.com.br/styles/main.css">
+    /*
+      print_r($names_arr);
+      echo "<br>";
+     */
 
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    if (count($names_arr) == 2) {
+        $first_name = $names_arr[0];
+        $last_name = $names_arr[1];
+    }
 
-        <script type="text/javascript" src="/custom/js/custom.js"></script>
+    if (count($names_arr) == 3) {
+        $first_name = $names_arr[0] . " " . $names_arr[1];
+        $last_name = $names_arr[2];
+    }
 
-        <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4></script>
+    if ($last_name == '') {
+        $last_name = 'Customer';
+    }
 
+    $user->country = 'BR';
+    $user->first_name = $first_name;
+    $user->last_name = $last_name;
+    $user->pwd = $_POST['password'];
+    $user->email = $_POST['email'];
+    $user->cpf = $_POST['cpf'];
+    $user->birth = $_POST['nascimento'];
+    $user->zip = $_POST['address_cep'];
+    $user->address = $_POST['address'] . " " . $_POST['address_num'];
+    $user->city = $_POST['address_complement'];
+    $user->state = $_POST['address_neighbourhood'];
+    $user->phone = $_POST['phone'];
+    $user->license_no = $_POST['nr_cnh'];
+    $user->code = $_POST['renach'];
+    $user->sex = $_POST['sex'];
+    $user->rg = $_POST['rg'];
+    $user->orgao_expedidor = $_POST['orgao_expedidor'];
+    $user->mom_name = $_POST['mom_name'];
+    $user->cell_phone = $_POST['cell_phone'];
+    $user->drive_category = $_POST['categoria'];
 
-    </head>
-    <body>
-        
-        
-        <?php
-        
-        /*
-        echo "<pre>";
-        print_r($_REQUEST);
-        echo "</pre>";
-        */
-        
-        
-        ?>
-
-
+    $status = $sn->create_user_account($user);
+    ?>
 
     <html dir="ltr" lang="en" xml:lang="en" class="yui3-js-enabled"><head>
             <title>Instituto Pró Vida: Log in to the site</title>
@@ -94,7 +112,9 @@
             <script type="text/javascript" src="http://ead.iprovida.org.br/theme/jquery.php/theme_lambda/camera.min.1.11.js"></script>
             <script type="text/javascript" src="http://ead.iprovida.org.br/theme/jquery.php/theme_lambda/jquery.bxslider.js"></script>
             <script type="text/javascript" src="http://ead.iprovida.org.br/lib/javascript.php/1479404929/lib/javascript-static.js"></script>
+            <script src = 'https://cdnjs.cloudflare.com/ajax/libs/js-cookie/2.1.3/js.cookie.js' ></script> 
             <script type="text/javascript">
+
                 //<![CDATA[
                 document.body.className += ' jsenabled';
                 //]]>
@@ -119,17 +139,6 @@
 
                             <div class="login-header" id="yui_3_17_2_1_1479820015848_36">
                                 <div class="profileblock" id="yui_3_17_2_1_1479820015848_35">
-
-                                    <form class="navbar-form pull-right" method="post" action="http://ead.iprovida.org.br/login/index.php?authldap_skipntlmsso=1" id="yui_3_17_2_1_1479820015848_34">
-                                        <div id="block-login">
-                                            <label id="user"><i class="fa fa-user"></i></label>	
-                                            <input id="inputName" class="span2" type="text" name="username" placeholder="Username" style="margin-bottom:10px;">
-                                            <label id="pass"><i class="fa fa-key"></i></label>        
-                                            <input id="inputPassword" class="span2" type="password" name="password" placeholder="Password">        
-                                            <input type="submit" id="submit" name="submit" value="">
-                                        </div>
-                                    </form>
-
 
                                 </div>
                             </div>
@@ -178,34 +187,57 @@
                         <section id="region-main" class="span12">
                             <span class="notifications" id="user-notifications"></span><div role="main" id="yui_3_17_2_1_1479820015848_44"><span id="maincontent"></span><div class="loginbox clearfix onecolumn" id="yui_3_17_2_1_1479820015848_43">
                                     <div class="loginpanel" id="yui_3_17_2_1_1479820015848_42">
-                                       
+
                                         <div class="subcontent loginsub" id="yui_3_17_2_1_1479820015848_41">
                                             <div class="row-fluid" style="text-align: center;">
-                                                <p align='center'>Dear Customer!</p>
-                                                <p align='center'>Thank you for your order!</p>
 
-                                                <table align='center'>
-                                                    <tr>
-                                                        <td style='padding:15px;'>Your username: </td>
-                                                        <td style='padding:15px;'></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style='padding:15px;'>Your password: </td>
-                                                        <td style='padding:15px;'></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style='padding:15px;' solspan='2'>An email was sent to ...   . If you need assistance please contact us by some@somehost.com</td>
-                                                    </tr>
-                                                </table>
+                                                <!-- --------------------------------------- This is divider ---------------------------------------->                                           
+                                                <?php
+                                                if ($status === true) {
+                                                    $name = $sn->coursename;
+                                                    $amount = $sn->amount;
+                                                    $button = $sn->get_paypal_button($user);
+                                                    ?>
 
+                                                    <div id="dados-inscricao" ng-controller="InscricaoCtrl" class="container">
+
+                                                        <div class="row-fluid" style="text-align: center;">
+                                                            <span class="span4"><?php echo $name; ?></span>
+                                                            <span class="span2"><?php echo $amount . " BRL"; ?></span>
+                                                            <span class="span1"><?php echo $button; ?></span>
+                                                        </div>
+                                                        <div class="row" style="">
+                                                            <span class="col-xs-10" id="info"></span>
+                                                        </div>
+
+                                                    </div>
+
+                                                    </body>
+                                                    </html>
+
+
+                                                    <?php
+                                                } // end if status == true
+                                                else {
+                                                    ?>
+
+                                                    <div class="row" style="">
+                                                        <span class="col-xs-6" id="info" style='color: red;'>Signup error happend. Email already in use</span>
+                                                    </div>
+
+                                                </div>
+                                                <div class="desc">
+                                                    Cookies must be enabled in your browser<span class="helptooltip"><a href="http://ead.iprovida.org.br/help.php?component=moodle&amp;identifier=cookiesenabled&amp;lang=en" title="Help with Cookies must be enabled in your browser" aria-haspopup="true" target="_blank"><img src="http://ead.iprovida.org.br/theme/image.php/lambda/core/1479404929/help" alt="Help with Cookies must be enabled in your browser" class="iconhelp"></a></span>        </div>
                                             </div>
-                                            <div class="desc">
-                                                Cookies must be enabled in your browser<span class="helptooltip"><a href="http://ead.iprovida.org.br/help.php?component=moodle&amp;identifier=cookiesenabled&amp;lang=en" title="Help with Cookies must be enabled in your browser" aria-haspopup="true" target="_blank"><img src="http://ead.iprovida.org.br/theme/image.php/lambda/core/1479404929/help" alt="Help with Cookies must be enabled in your browser" class="iconhelp"></a></span>        </div>
-                                        </div>
 
+                                            ?>
+                                            <?php
+                                        } // end else 
+                                        ?>
                                     </div>
                                 </div>
-                            </div>        </section>
+                            </div>        
+                        </section>
                     </div>
 
                     <a href="#top" class="back-to-top" style="display: none;"><i class="fa fa-chevron-circle-up fa-3x"></i><p></p></a>
@@ -220,12 +252,7 @@
                         <div class="row-fluid">
                             <p class="helplink"></p>
                         </div>
-
-
-
                     </div>
-
-
                 </footer>
 
                 <script type="text/javascript">
@@ -334,13 +361,11 @@
                         })
                     });
                 </script>
+        </body>
+    </html>
+
+    <?php
+} // end if post 
 
 
-
-
-            </div></body></html>
-
-
-
-
-
+   

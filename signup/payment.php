@@ -4,7 +4,8 @@ require_once './classes/Signup.php';
 $sn = new Signup();
 
 if ($_POST) {
-
+    
+    $user=new stdClass();
     $user->country = 'BR';
     $user->first_name = $_POST['firstname'];
     $user->last_name = $_POST['lastname'];

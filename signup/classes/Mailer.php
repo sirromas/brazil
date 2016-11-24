@@ -131,11 +131,12 @@ class Mailer {
         $message.="</body>";
         $message.="</html>";
 
-        $mail->setFrom($this->mail_smtp_user, 'IPróVida');
+        $value = 'IPV';
+        $mail->setFrom($this->mail_smtp_user, $value);
 
         $mail->addAddress($user->email);
         //$mail->addAddress('sirromas@gmail.com');
-        $mail->addReplyTo($this->mail_smtp_user, 'IPróVida');
+        $mail->addReplyTo($this->mail_smtp_user, htmlentities(utf8_encode($value), 0, "UTF-8"));
         $mail->isHTML(true);
         $mail->Subject = 'Payment confirmation';
         $mail->Body = $message;

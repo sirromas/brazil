@@ -102,7 +102,7 @@ class Signup {
                 . "code='$user->license_no', "
                 . "phone1='$user->phone', "
                 . "phone2='$user->cell_phone' "
-                . "where username='$user->email'";
+                . "where username='$user->cpf'";
         //echo "Query: " . $query . "<br>";
         $this->db->query($query);
     }

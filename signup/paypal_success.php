@@ -14,8 +14,17 @@ $user_data = $_REQUEST['cm'];
 $user_data_arr = explode('/', $user_data);
 $payment->email = $user_data_arr[0];
 $payment->pwd = $user_data_arr[1];
+$payment->cpf = $user_data_arr[2];
 $payment->transid = $_REQUEST['tx'];
 $status = $_REQUEST['st'];
+
+/*
+echo "<pre>";
+print_r($payment);
+echo "</pre>";
+die();
+*/
+
 ?>
 
 
@@ -169,27 +178,27 @@ $status = $_REQUEST['st'];
 
                                                 <table align='center'>
                                                     <tr>
-                                                        <td colspan="2" style='padding:15px;text-align:center; '>Dear Customer!</td>
+                                                        <td colspan="2" style='padding:15px;text-align:center; '>Prezado Aluno!</td>
                                                     </tr>    
 
                                                     <tr>
-                                                        <td colspan="2" style='padding:15px;text-align:center; '>Thank you for your order!</td>
+                                                        <td colspan="2" style='padding:15px;text-align:center; '>Obrigada por se cadastrar no nosso curso!</td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td colspan="2" style='padding:15px;text-align:center; '>Your order ID: <?php echo $payment->transid; ?> </td>
+                                                        <td colspan="2" style='padding:15px;text-align:center; '>Segue ID da sua solicitação: <?php echo $payment->transid; ?> </td>
                                                     </tr>
 
                                                     <tr>
-                                                        <td style='padding:15px;text-align:center; ' colspan="2">Your username: <?php echo $payment->email; ?></td>
-                                                        
+                                                        <td style='padding:15px;text-align:center; ' colspan="2">Seu usuário:: <?php echo $payment->cpf; ?></td>
+
                                                     </tr>
                                                     <tr>
-                                                        <td style='padding:15px;text-align:center; ' colspan="2">Your password: <?php echo $payment->pwd; ?></td>
-                                                        
+                                                        <td style='padding:15px;text-align:center; ' colspan="2">Sua senha: <?php echo $payment->pwd; ?></td>
+
                                                     </tr>
                                                     <tr>
-                                                        <td style='padding:15px;' solspan='2'>An email was sent to <?php echo $payment->email; ?> . If you need assistance please contact us by info@ead.iprovida.org.br</td>
+                                                        <td style='padding:15px;' solspan='2'>Esse email foi enviado por <?php echo $payment->email; ?> . Caso você precise de assistência, entre encontato através do email info@ead.iprovida.org.br</td>
                                                     </tr>
                                                 </table>
 

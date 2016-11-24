@@ -24,7 +24,7 @@ if ($_REQUEST) {
 
     $user = new stdClass();
     $user->confirmed = 1; // It is alwayes confirmed, but we check payment status after user login
-    $user->username = strtolower($posted_user->email);
+    $user->username = strtolower($posted_user->cpf);
     $user->password = $posted_user->pwd;
     $user->email = strtolower($posted_user->email);
     $user->email1 = strtolower($posted_user->email);

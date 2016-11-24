@@ -22,8 +22,8 @@ class Signup {
         $this->signup_url = 'http://' . $_SERVER['SERVER_NAME'] . '/login/my_signup.php';
     }
 
-    function getUserId($email) {
-        $query = "select id from mdl_user where username='" . $email . "'";
+    function getUserId($item) {
+        $query = "select id from mdl_user where username='" . $item . "'";
         $result = $this->db->query($query);
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $userid = $row['id'];
@@ -126,9 +126,9 @@ class Signup {
         //$response = file_get_contents($this->signup_url, false, $context);
         //print_r($response);
         //die();
-        if ($response !==false) {
+        if ($response !== false) {
             // 2. Enroll user into course
-            $userid = $this->getUserId($user->email);
+            $userid = $this->getUserId($user->cpf);
             $this->assign_roles($userid, $this->courseid);
             $this->update_user_data($user);
             $mail = new Mailer();
@@ -149,7 +149,7 @@ class Signup {
         <input type='hidden' name='business' value='sirromas@ukr.net'>
         <input type='hidden' name='item_name' value='$this->coursename'>
         <input type='hidden' name='amount' value='$this->amount'>
-        <input type='hidden' name='custom' value='$user->email/$user->pwd'>    
+        <input type='hidden' name='custom' value='$user->email/$user->pwd/$user->cpf'>    
         <INPUT TYPE='hidden' NAME='currency_code' value='BRL'>    
         <input type='hidden' name='first_name' value='$user->first_name'>
         <input type='hidden' name='last_name' value='$user->last_name'>
@@ -172,8 +172,8 @@ class Signup {
         return $list;
     }
 
-    function get_user_data($email) {
-        $query = "select * from mdl_user where username='$email'";
+    function get_user_data($item) {
+        $query = "select * from mdl_user where username='$item'";
         $result = $this->db->query($query);
         while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
             $user = new stdClass();
@@ -185,11 +185,12 @@ class Signup {
     }
 
     function add_user_payment($payment) {
-        $userid = $this->getUserId($payment->email);
-        $user = $this->get_user_data($payment->email);
+        $userid = $this->getUserId($payment->cpf);
+        $user = $this->get_user_data($payment->cpf);
         $user->amount = $this->amount;
         $user->coursename = $this->coursename;
         $user->pwd = $payment->pwd;
+        $user->cpf = $payment->cpf;
         $date = time();
         $orderid = 'ref_' . $date;
         $query = "insert into mdl_paypal_payments "
@@ -209,7 +210,7 @@ class Signup {
                 . "'$date')";
         $this->db->query($query);
 
-        $mail = new Mailer($payment->email);
+        $mail = new Mailer();
         $mail->send_payment_confirmation_message($user);
     }
 

@@ -89,42 +89,42 @@ class Mailer {
         $message = "";
         $message.="<html>";
         $message.="<body><br><br>";
-        
+
         $message.="<table align='center'>";
-        
+
         $message.="<tr>";
         $message.="<td style='padding:15px;' align='center' colspan='2'><img src='http://ipvtransito.com.br/images/logo.png'></td>";
         $message.="</tr>";
-        
+
         $message.="<tr>";
         $message.="<td style='padding:15px;' align='center' colspan='2'>Prezado aluno,</td>";
         $message.="</tr>";
-        
+
         $message.="<tr>";
         $message.="<td style='padding:15px;' align='center' colspan='2'>Você acaba de se matricular no curso de Reciclagem para Condutores Infratores.
-                                Para acessar o curso, clique aqui.</td>";
+                                Para acessar o curso, <a href='http://ead.iprovida.org.br/' target='_blank'>clique aqui</a>.</td>";
         $message.="</tr>";
-        
+
         /*
+          $message.="<tr>";
+          $message.="<td style='padding:15px;' align='center'>We received your payment of $user->amount BRL. Thank you!</td>";
+          $message.="</tr>";
+
+          $message.="<tr>";
+          $message.="<td style='padding:15px;' align='center'>You have now full access to $user->coursename</td>";
+          $message.="</tr>";
+         */
+
         $message.="<tr>";
-        $message.="<td style='padding:15px;' align='center'>We received your payment of $user->amount BRL. Thank you!</td>";
+        $message.="<td style='padding:15px;' >Seu usuário:</td><td style='padding:15px;'>$user->cpf</td>";
         $message.="</tr>";
 
         $message.="<tr>";
-        $message.="<td style='padding:15px;' align='center'>You have now full access to $user->coursename</td>";
-        $message.="</tr>";
-        */
-        
-        $message.="<tr>";
-        $message.="<td style='padding:15px;' >Your username:</td><td style='padding:15px;'>$user->email</td>";
+        $message.="<td style='padding:15px;' >Sua senha:</td><td style='padding:15px;'>$user->pwd</td>";
         $message.="</tr>";
 
         $message.="<tr>";
-        $message.="<td style='padding:15px;' >Your password:</td><td style='padding:15px;'>$user->pwd</td>";
-        $message.="</tr>";
-
-        $message.="<tr>";
-        $message.="<td style='padding:15px;'>Best regards, <p>IPróVida team</td>";
+        $message.="<td style='padding:15px;'>Atenciosamente,<br>IPróVida.</td>";
         $message.="</tr>";
 
         $message.="</table>";

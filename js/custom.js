@@ -2,20 +2,14 @@
 
 $(document).ready(function () {
     console.log("ready!");
-    $("#signup").submit(function (event) {
-        var names = $('#name').val().trim();
-        var names_arr = names.split(' ');
-        console.log(JSON.stringify(names_arr));
-        console.log('Array length: ' + names_arr.length < 2);
-        if (names_arr.length < 2) {
-            $('#form_err').html('Please provide firstname and lastname separated by space');
-            event.preventDefault();
-        } // end if
-        else {
-            ('#form_err').html('');
-        }
-    });
 
+    $("#cpf").mask("999.999.999-99");
+    $("#phone").mask("(99) 9999-9999");
+    $("#rg").mask("99.999.999-9");
+    $("#address_cep").mask("99999-999");
+    $('#cell_phone').mask("(99) 9999-9999?9");
+    $('#nascimento').mask("99/99/9999");
+    $('#renach').mask("AA ********");
 
 }); // end of document ready
 

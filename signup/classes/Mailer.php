@@ -89,12 +89,23 @@ class Mailer {
         $message = "";
         $message.="<html>";
         $message.="<body><br><br>";
+        
         $message.="<table align='center'>";
-
+        
         $message.="<tr>";
-        $message.="<td style='padding:15px;' align='center'>Dear Customer!</td>";
+        $message.="<td style='padding:15px;' align='center' colspan='2'><img src='http://ipvtransito.com.br/images/logo.png'></td>";
         $message.="</tr>";
-
+        
+        $message.="<tr>";
+        $message.="<td style='padding:15px;' align='center' colspan='2'>Prezado aluno,</td>";
+        $message.="</tr>";
+        
+        $message.="<tr>";
+        $message.="<td style='padding:15px;' align='center' colspan='2'>Você acaba de se matricular no curso de Reciclagem para Condutores Infratores.
+                                Para acessar o curso, clique aqui.</td>";
+        $message.="</tr>";
+        
+        /*
         $message.="<tr>";
         $message.="<td style='padding:15px;' align='center'>We received your payment of $user->amount BRL. Thank you!</td>";
         $message.="</tr>";
@@ -102,7 +113,8 @@ class Mailer {
         $message.="<tr>";
         $message.="<td style='padding:15px;' align='center'>You have now full access to $user->coursename</td>";
         $message.="</tr>";
-
+        */
+        
         $message.="<tr>";
         $message.="<td style='padding:15px;' >Your username:</td><td style='padding:15px;'>$user->email</td>";
         $message.="</tr>";

@@ -126,7 +126,7 @@ class Signup {
         //$response = file_get_contents($this->signup_url, false, $context);
         //print_r($response);
         //die();
-        if ($response !== false) {
+        if ($response !==false) {
             // 2. Enroll user into course
             $userid = $this->getUserId($user->email);
             $this->assign_roles($userid, $this->courseid);

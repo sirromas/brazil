@@ -5,46 +5,16 @@ $sn = new Signup();
 
 if ($_POST) {
 
-    /*
-      echo "<pre>";
-      print_r($_POST);
-      echo "</pre><br>--------------------------------------<br>";
-     */
-
-    // Prepare user object
-    $user = new stdClass();
-    $names = $_POST['name'];
-    $names_arr = explode(' ', $names);
-
-    /*
-      print_r($names_arr);
-      echo "<br>";
-     */
-
-    if (count($names_arr) == 2) {
-        $first_name = $names_arr[0];
-        $last_name = $names_arr[1];
-    }
-
-    if (count($names_arr) == 3) {
-        $first_name = $names_arr[0] . " " . $names_arr[1];
-        $last_name = $names_arr[2];
-    }
-
-    if ($last_name == '') {
-        $last_name = 'Customer';
-    }
-
     $user->country = 'BR';
-    $user->first_name = $first_name;
-    $user->last_name = $last_name;
+    $user->first_name = $_POST['firstname'];
+    $user->last_name = $_POST['lastname'];
     $user->pwd = $_POST['password'];
     $user->email = $_POST['email'];
     $user->cpf = $_POST['cpf'];
     $user->birth = $_POST['nascimento'];
     $user->zip = $_POST['address_cep'];
     $user->address = $_POST['address'] . " " . $_POST['address_num'];
-    $user->city = $_POST['address_complement'];
+    $user->city = $_POST['address_neighbourhood'];
     $user->state = $_POST['address_neighbourhood'];
     $user->phone = $_POST['phone'];
     $user->license_no = $_POST['nr_cnh'];
@@ -55,7 +25,13 @@ if ($_POST) {
     $user->mom_name = $_POST['mom_name'];
     $user->cell_phone = $_POST['cell_phone'];
     $user->drive_category = $_POST['categoria'];
-
+    
+    /*
+    echo "<pre>";
+    print_r($user);
+    echo "</pre>";
+    die();
+    */
     $status = $sn->create_user_account($user);
     ?>
 
@@ -193,7 +169,7 @@ if ($_POST) {
 
                                                 <!-- --------------------------------------- This is divider ---------------------------------------->                                           
                                                 <?php
-                                                if ($status === true) {
+                                                if ($status === TRUE) {
                                                     $name = $sn->coursename;
                                                     $amount = $sn->amount;
                                                     $button = $sn->get_paypal_button($user);
@@ -230,7 +206,7 @@ if ($_POST) {
                                                     Cookies must be enabled in your browser<span class="helptooltip"><a href="http://ead.iprovida.org.br/help.php?component=moodle&amp;identifier=cookiesenabled&amp;lang=en" title="Help with Cookies must be enabled in your browser" aria-haspopup="true" target="_blank"><img src="http://ead.iprovida.org.br/theme/image.php/lambda/core/1479404929/help" alt="Help with Cookies must be enabled in your browser" class="iconhelp"></a></span>        </div>
                                             </div>
 
-                                            ?>
+                                            
                                             <?php
                                         } // end else 
                                         ?>

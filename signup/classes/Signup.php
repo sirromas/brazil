@@ -99,7 +99,7 @@ class Signup {
                 . "birth='$user->birth', "
                 . "license='$user->license_no ', "
                 . "category='$user->drive_category', "
-                . "code='$user->license_no', "
+                . "code='$user->code', "
                 . "phone1='$user->phone', "
                 . "phone2='$user->cell_phone' "
                 . "where username='$user->cpf'";

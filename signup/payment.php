@@ -4,8 +4,8 @@ require_once './classes/Signup.php';
 $sn = new Signup();
 
 if ($_POST) {
-    
-    $user=new stdClass();
+
+    $user = new stdClass();
     $user->country = 'BR';
     $user->first_name = $_POST['firstname'];
     $user->last_name = $_POST['lastname'];
@@ -26,13 +26,13 @@ if ($_POST) {
     $user->mom_name = $_POST['mom_name'];
     $user->cell_phone = $_POST['cell_phone'];
     $user->drive_category = $_POST['categoria'];
-    
+
     /*
-    echo "<pre>";
-    print_r($user);
-    echo "</pre>";
-    die();
-    */
+      echo "<pre>";
+      print_r($user);
+      echo "</pre>";
+      die();
+     */
     $status = $sn->create_user_account($user);
     ?>
 
@@ -134,21 +134,6 @@ if ($_POST) {
                                 <span class="icon-bar"></span>
                                 <span class="icon-bar"></span>
                             </a>
-                            <div class="nav-collapse collapse">
-                                <ul class="nav"><li class="dropdown langmenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Language">English ‎(en)‎<b class="caret"></b></a><ul class="dropdown-menu"><li><a title="English ‎(en)‎" href="http://ead.iprovida.org.br/login/index.php?lang=en">English ‎(en)‎</a></li><li><a title="Português - Brasil ‎(pt_br)‎" href="http://ead.iprovida.org.br/login/index.php?lang=pt_br">Português - Brasil ‎(pt_br)‎</a></li></ul></li></ul>                <div class="nav-divider-right"></div>
-                                <ul class="nav pull-right">
-                                    <li></li>
-                                </ul>
-
-                                <form id="search" action="http://ead.iprovida.org.br/course/search.php" method="GET">
-                                    <div class="nav-divider-left"></div>							
-                                    <input id="coursesearchbox" type="text" onfocus="if (this.value == 'Search courses')
-                                                this.value = ''" onblur="if (this.value == '')
-                                                            this.value = 'Search courses'" value="Search courses" name="search">
-                                    <input type="submit" value="">							
-                                </form>
-
-                            </div>
                         </div>
                     </nav>
                 </header>
@@ -181,7 +166,7 @@ if ($_POST) {
                                                         <div class="row-fluid" style="text-align: center;">
                                                             <span class="span4"><?php echo $name; ?></span>
                                                             <span class="span2"><?php echo $amount . " BRL"; ?></span>
-                                                            <span class="span1"><?php echo $button; ?></span>
+                                                            <span class="span1" style="text-align: left;"><?php echo $button; ?></span>
                                                         </div>
                                                         <div class="row" style="">
                                                             <span class="col-xs-10" id="info"></span>
@@ -207,7 +192,7 @@ if ($_POST) {
                                                     Cookies must be enabled in your browser<span class="helptooltip"><a href="http://ead.iprovida.org.br/help.php?component=moodle&amp;identifier=cookiesenabled&amp;lang=en" title="Help with Cookies must be enabled in your browser" aria-haspopup="true" target="_blank"><img src="http://ead.iprovida.org.br/theme/image.php/lambda/core/1479404929/help" alt="Help with Cookies must be enabled in your browser" class="iconhelp"></a></span>        </div>
                                             </div>
 
-                                            
+
                                             <?php
                                         } // end else 
                                         ?>

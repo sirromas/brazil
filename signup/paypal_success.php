@@ -19,12 +19,11 @@ $payment->transid = $_REQUEST['tx'];
 $status = $_REQUEST['st'];
 
 /*
-echo "<pre>";
-print_r($payment);
-echo "</pre>";
-die();
-*/
-
+  echo "<pre>";
+  print_r($payment);
+  echo "</pre>";
+  die();
+ */
 ?>
 
 
@@ -138,21 +137,6 @@ die();
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </a>
-                        <div class="nav-collapse collapse">
-                            <ul class="nav"><li class="dropdown langmenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Language">English ‎(en)‎<b class="caret"></b></a><ul class="dropdown-menu"><li><a title="English ‎(en)‎" href="http://ead.iprovida.org.br/login/index.php?lang=en">English ‎(en)‎</a></li><li><a title="Português - Brasil ‎(pt_br)‎" href="http://ead.iprovida.org.br/login/index.php?lang=pt_br">Português - Brasil ‎(pt_br)‎</a></li></ul></li></ul>                <div class="nav-divider-right"></div>
-                            <ul class="nav pull-right">
-                                <li></li>
-                            </ul>
-
-                            <form id="search" action="http://ead.iprovida.org.br/course/search.php" method="GET">
-                                <div class="nav-divider-left"></div>							
-                                <input id="coursesearchbox" type="text" onfocus="if (this.value == 'Search courses')
-                                            this.value = ''" onblur="if (this.value == '')
-                                                        this.value = 'Search courses'" value="Search courses" name="search">
-                                <input type="submit" value="">							
-                            </form>
-
-                        </div>
                     </div>
                 </nav>
             </header>

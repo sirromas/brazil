@@ -1,6 +1,15 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 25, 2016, 10:58:02 AM
+    Author     : moyo
+*/
 
 .cert {
-    background-image: url(http://ead.iprovida.org.br/custom/certificates/img/certificado_bg.jpg);
+    background-image: url(../img/certificado_bg.jpg);
     background-repeat: no-repeat;
     background-size:100% auto;
     text-align:center;
@@ -11,11 +20,12 @@
 
 .text {
     width: 70%;
-    height: 21%;
+    height: 20%;
+    border-style: dashed;
     display: inline-block;
-    margin-left: 2px;
+    margin-left: 5px;
     margin-top: 277px;
-    font-size: 16px;
-    text-align: center;
+    font-size: 17px;
+    text-align: justify
     
 }

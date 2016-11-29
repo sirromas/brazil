@@ -160,7 +160,7 @@ class Dashboard extends Signup {
         $button = $this->get_paypal_button($user);
 
         $list.="<div class='container-fluid' style='font-weight:bold;'>";
-        $list.="<span class='span12'>Please make a payment to get course access: </span>";
+        $list.="<span class='span12'>Prezado. Você não atingiu a nota mínima requerida para o curso. Para continuá-lo precisará efetuar um novo pagamento: </span>";
         $list.="</div>";
 
         $list.="<div class='container-fluid' style=''>";
@@ -176,7 +176,7 @@ class Dashboard extends Signup {
         $button = $this->get_paypal_button($user);
 
         $list.="<div class='container-fluid' style='font-weight:bold;'>";
-        $list.="<span class='span12'>Your course grades are low, to get course access again please make a payment: </span>";
+        $list.="<span class='span12'>Prezado. Você não atingiu a nota mínima requerida para o curso. Para continuá-lo precisará efetuar um novo pagamento. </span>";
         $list.="</div>";
 
         $list.="<div class='container-fluid' style=''>";

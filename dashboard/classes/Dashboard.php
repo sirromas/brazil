@@ -54,6 +54,7 @@ class Dashboard extends Signup {
             foreach ($row as $key => $value) {
                 $user->$key = $value;
             }
+            $user->pwd = $row['purepwd'];
         }
         // Add additional properties to the class
         $user->userid = $USER->id;
@@ -164,7 +165,7 @@ class Dashboard extends Signup {
         $list.="</div>";
 
         $list.="<div class='container-fluid' style=''>";
-        $list.="<span class='span8'>$this->coursename</span>";
+        $list.="<span class='span8' style='padding-top:12px;'>$this->coursename</span>";
         $list.="<span class='span1'>$button</span>";
         $list.="</div><br><br>";
 
@@ -179,8 +180,8 @@ class Dashboard extends Signup {
         $list.="<span class='span12'>Prezado. Você não atingiu a nota mínima requerida para o curso. Para continuá-lo precisará efetuar um novo pagamento. </span>";
         $list.="</div>";
 
-        $list.="<div class='container-fluid' style=''>";
-        $list.="<span class='span8'>$this->coursename</span>";
+        $list.="<div class='container-fluid vertical-center' style=''>";
+        $list.="<span class='span8' style='padding-top:12px;'>$this->coursename</span>";
         $list.="<span class='span1'>$button</span>";
         $list.="</div><br><br>";
 
@@ -192,7 +193,7 @@ class Dashboard extends Signup {
         $link = "http://" . $_SERVER['SERVER_NAME'] . "/custom/certificates/files/$user->userid/$user->courseid/certificate.pdf";
 
         $list.="<div class='container-fluid' style='font-weight:bold;'>";
-        $list.="<span class='span9'><a href='$link' target='_blank'>Course Certificado</a></span>";
+        $list.="<span class='span9'><a href='$link' target='_blank'>Curso Certificado</a></span>";
         $list.="</div><br><br>";
 
         return $list;

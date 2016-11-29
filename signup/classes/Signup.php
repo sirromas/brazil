@@ -93,6 +93,7 @@ class Signup {
     function update_user_data($user) {
         $query = "update mdl_user "
                 . "set 	gender='$user->sex', "
+                . "purepwd='$user->pwd', "
                 . "cpf='$user->cpf', "
                 . "rg='$user->rg', "
                 . "uf='$user->orgao_expedidor', "
@@ -164,8 +165,8 @@ class Signup {
         
 
         <input type='image' name='submit'
-          src='https://www.paypalobjects.com/en_US/i/btn/btn_buynow_LG.gif'
-          alt='PayPal - The safer, easier way to pay online'>
+          src='https://www.iccjp.com/wp-content/uploads/2014/08/pagar-com-paypal.png'
+          width='352' height='52' alt='PayPal - The safer, easier way to pay online'>
       </form>
       ";
 

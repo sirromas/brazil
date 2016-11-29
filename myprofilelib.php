@@ -189,10 +189,11 @@ function core_myprofile_navigation(core_user\output\myprofile\tree $tree, $user,
 
     // *************** Get user certificate data from db ***************
     $ds_user = $ds->get_user_data();
+
     $status = $ds->is_user_passed($ds_user->userid, $ds_user->courseid);
     if ($status == 1) {
         $link = "http://" . $_SERVER['SERVER_NAME'] . "/custom/certificates/files/$ds_user->userid/$ds_user->courseid/certificate.pdf";
-        $block = "<a href='$link' target='_blank'>Certificado</a>";
+        $block = "<a href='$link' target='_blank'>Course Certificado</a>";
         $node = new core_user\output\myprofile\node('contact', 'certificate', 'Certificado', null, null, $block);
     } // end if
     else {

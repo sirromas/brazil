@@ -43,9 +43,17 @@ class Certificate {
         return $user;
     }
 
+    function is_certificate_exists($userid, $courseid) {
+        $query = "select * from mdl_certificates "
+                . "where userid=$userid "
+                . "and courseid=$courseid";
+        $num = $this->db->numrows($query);
+        return $num;
+    }
+
     function create_user_certificate($userid, $courseid) {
         $list = "";
-        $list2="";
+        $list2 = "";
         $coursename = $this->get_course_name($courseid);
         $user = $this->get_student_details($userid);
         $list.="<!DOCTYPE HTML SYSTEM>";
@@ -68,9 +76,9 @@ class Certificate {
         $list.="</div>";
         $list.="</body>";
         $list.="</html>";
-        
+
         // ****** Because of mPDF limitations we use online css styles *******/
-        
+
         $list2.="<!DOCTYPE HTML SYSTEM>";
         $list2.="<head>";
         $list2.="<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>";
@@ -109,6 +117,16 @@ class Certificate {
         $path2 = $dir_path . "/certificate.html";
         file_put_contents($path2, $list);
         $pdf->Output($path, 'F');
+
+        $date = time();
+        $status = $this->is_certificate_exists($userid, $courseid);
+        if ($status == 0) {
+            $query = "insert into mdl_certificates "
+                    . "(userid, "
+                    . "courseid, "
+                    . "issue_date) values($userid,$courseid,$date)";
+            $this->db->query($query);
+        }
 
         return "Certificate has been created";
     }

@@ -15,6 +15,7 @@ $user_data_arr = explode('/', $user_data);
 $payment->email = $user_data_arr[0];
 $payment->pwd = $user_data_arr[1];
 $payment->cpf = $user_data_arr[2];
+$payment->unenrol = $user_data_arr[3];
 $payment->transid = $_REQUEST['tx'];
 $status = $_REQUEST['st'];
 

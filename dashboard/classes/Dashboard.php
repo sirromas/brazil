@@ -174,7 +174,7 @@ class Dashboard extends Signup {
 
     function get_low_score_message($user) {
         $list = "";
-        $button = $this->get_paypal_button($user);
+        $button = $this->get_paypal_button($user, 1);
 
         $list.="<div class='container-fluid' style='font-weight:bold;'>";
         $list.="<span class='span12'>Prezado. Você não atingiu a nota mínima requerida para o curso. Para continuá-lo precisará efetuar um novo pagamento. </span>";

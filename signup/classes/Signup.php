@@ -5,6 +5,7 @@
  *
  * @author moyo
  */
+require_once $_SERVER['DOCUMENT_ROOT'] . '/config.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/custom/class.pdo.database.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/custom/signup/classes/Mailer.php';
 
@@ -90,6 +91,23 @@ class Signup {
         $this->db->query($query);
     }
 
+    function unenroll_user($userid, $courseid) {
+        $roleid = $this->student_role;
+        $enrolid = $this->getEnrolId($courseid);
+        $contextid = $this->getCourseContext($courseid, $roleid);
+
+        $query = "delete from mdl_user_enrolments "
+                . "where enrolid=$enrolid and userid=$userid";
+        $this->db->query($query);
+
+
+        $query = "delete from mdl_role_assignments "
+                . "where roleid=$roleid "
+                . "and contextid=$contextid "
+                . "and userid=$userid";
+        $this->db->query($query);
+    }
+
     function update_user_data($user) {
         $query = "update mdl_user "
                 . "set 	gender='$user->sex', "
@@ -141,7 +159,7 @@ class Signup {
         }
     }
 
-    function get_paypal_button($user) {
+    function get_paypal_button($user, $unenroll = 0) {
         $list = "";
 
         $list.="<form action='https://www.sandbox.paypal.com/cgi-bin/webscr' method='post'>
@@ -150,7 +168,7 @@ class Signup {
         <input type='hidden' name='business' value='sirromas@ukr.net'>
         <input type='hidden' name='item_name' value='$this->coursename'>
         <input type='hidden' name='amount' value='$this->amount'>
-        <input type='hidden' name='custom' value='$user->email/$user->pwd/$user->cpf'>    
+        <input type='hidden' name='custom' value='$user->email/$user->pwd/$user->cpf/$unenroll'>    
         <INPUT TYPE='hidden' NAME='currency_code' value='BRL'>    
         <input type='hidden' name='first_name' value='$user->first_name'>
         <input type='hidden' name='last_name' value='$user->last_name'>
@@ -213,6 +231,28 @@ class Signup {
 
         $mail = new Mailer();
         $mail->send_payment_confirmation_message($user);
+
+
+        if ($payment->unenrol == 1) {
+            // 1. Clear user previous course comletion state 
+            $query = "delete from mdl_course_modules_completion where userid=$userid";
+            $this->db->query($query);
+
+            // 2. Clear cache
+            $cache = cache::make('core', 'completion');
+            $cache->purge();
+
+            // 3. Clear SCORM data
+            $query = "delete from mdl_scorm_scoes_track where userid=$userid";
+            $this->db->query($query);
+
+            // 4. Clear quiz previous attempts
+            $query = "delete from mdl_quiz_attempts where userid=$userid";
+            $this->db->query($query);
+
+            $query = "delete from mdl_grade_grades where userid=$userid";
+            $this->db->query($query);
+        } // end if
     }
 
 }

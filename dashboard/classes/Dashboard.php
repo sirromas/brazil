@@ -193,7 +193,7 @@ class Dashboard extends Signup {
         $link = "http://" . $_SERVER['SERVER_NAME'] . "/custom/certificates/files/$user->userid/$user->courseid/certificate.pdf";
 
         $list.="<div class='container-fluid' style='font-weight:bold;'>";
-        $list.="<span class='span9'><a href='$link' target='_blank'>Curso Certificado</a></span>";
+        $list.="<span class='span9'><a href='$link' target='_blank'><button>Clique Aqui e Obtenha Seu Certificado</button></a></span>";
         $list.="</div><br><br>";
 
         return $list;

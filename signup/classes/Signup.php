@@ -162,10 +162,10 @@ class Signup {
     function get_paypal_button($user, $unenroll = 0) {
         $list = "";
 
-        $list.="<form action='https://www.sandbox.paypal.com/cgi-bin/webscr' method='post'>
+        $list.="<form action='https://www.paypal.com/cgi-bin/webscr' method='post'>
         <input type='hidden' name='cmd' value='_xclick'>
         <INPUT TYPE='hidden' name='charset' value='utf-8'>
-        <input type='hidden' name='business' value='sirromas@ukr.net'>
+        <input type='hidden' name='business' value='contato@iprovida.org.br'>
         <input type='hidden' name='item_name' value='$this->coursename'>
         <input type='hidden' name='amount' value='$this->amount'>
         <input type='hidden' name='custom' value='$user->email/$user->pwd/$user->cpf/$unenroll'>    

@@ -163,7 +163,7 @@ class Signup {
         $list = "";
 
         //$list.="<form action='https://www.paypal.com/cgi-bin/webscr' method='post'>"; // production
-        $list.="<form action='https://sandbox.paypal.com/cgi-bin/webscr' method='post'>"; // sandbox
+        $list.="<form action='https://www.sandbox.paypal.com/cgi-bin/webscr' method='post'>"; // sandbox
         $list.="<input type='hidden' name='cmd' value='_xclick'>";
         $list.="<INPUT TYPE='hidden' name='charset' value='utf-8'>";
         //$list.="<input type='hidden' name='business' value='contato@iprovida.org.br'>"; // production
